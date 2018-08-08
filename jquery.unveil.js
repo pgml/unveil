@@ -10,10 +10,16 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+  $.fn.unveil = function(opts, callback) {
+
+    opts = opts || {
+      threshold: 0,
+      useBgImage: false
+    }
 
     var $w = $(window),
-        th = threshold || 0,
+        th = opts.threshold,
+        useBgImage = opts.useBgImage,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
         images = this,
@@ -23,7 +29,10 @@
       var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) {
-        this.setAttribute("src", source);
+        if (useBgImage)
+          this.setAttribute("style", "background-image: url(" + source + ")");
+        else
+          this.setAttribute("src", source);
         if (typeof callback === "function") callback.call(this);
       }
     });
