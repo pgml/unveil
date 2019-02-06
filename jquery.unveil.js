@@ -14,12 +14,14 @@
 
     opts = opts || {
       threshold: 0,
-      useBgImage: false
+      useBgImage: false,
+      isPictureElement: false
     }
 
     var $w = $(window),
         th = opts.threshold,
         useBgImage = opts.useBgImage,
+        isPictureElement = opts.isPictureElement,
         retina = window.devicePixelRatio > 1,
         attrib = retina? "data-src-retina" : "data-src",
         images = this,
@@ -34,6 +36,12 @@
         else
           this.setAttribute("src", source);
         if (typeof callback === "function") callback.call(this);
+      }
+      if (isPictureElement) {
+        $(this).find("source").each(function(index, elem) {
+          var source = $(elem).attr("data-src")
+          $(elem).attr("srcset", source)
+        })
       }
     });
 
