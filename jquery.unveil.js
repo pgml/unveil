@@ -32,7 +32,7 @@
       source = source || this.getAttribute("data-src");
       if (source) {
         if (useBgImage)
-          this.setAttribute("style", "background-image: url(" + source + ")");
+          this.style.setProperty("background-image", "url(" + source + ")");
         else
           this.setAttribute("src", source);
         if (typeof callback === "function") callback.call(this);
