@@ -39,7 +39,7 @@
       }
       if (isPictureElement) {
         $(this).find("source").each(function(index, elem) {
-          var source = $(elem).attr("data-src")
+          var source = $(elem).attr("data-src") || $(elem).attr("data-srcset")
           $(elem).attr("srcset", source)
         })
       }
