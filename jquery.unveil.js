@@ -31,8 +31,11 @@
       var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) {
-        if (useBgImage)
-          this.style.setProperty("background-image", "url(" + source + ")");
+        if (useBgImage) {
+          var currentValues = this.style.getPropertyValue("background-image");
+          var newValues     = currentValues + ", url(" + source + ")";
+          this.style.setProperty("background-image", newValues);
+        }
         else
           this.setAttribute("src", source);
         if (typeof callback === "function") callback.call(this);
