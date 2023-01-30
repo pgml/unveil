@@ -33,7 +33,7 @@
       if (source) {
         if (useBgImage) {
           var currentValues = this.style.getPropertyValue("background-image");
-          var newValues     = currentValues + ", url(" + source + ")";
+          var newValues     = (!!currentValues ? currentValues + ", ": "") + "url(" + source + ")";
           this.style.setProperty("background-image", newValues);
         }
         else
